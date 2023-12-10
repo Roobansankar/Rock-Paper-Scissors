@@ -21,8 +21,6 @@ export default function Main() {
 
   const choices = ["rock", "paper", "scissors"];
 
-  
-
   const handleOnClick = (choice) => {
     if (!gameOver && hasSubmittedName && hasSubmittedName2) {
       setUserChoice(choice);
@@ -50,16 +48,14 @@ export default function Main() {
     window.location.reload();
   };
 
-
   useEffect(() => {
     alert("Enter your name to play the game!");
   }, []);
-  
-  
+
   useEffect(() => {
     const comboMoves = userChoice + computerChoice;
 
-    if (round < 6) {
+    if (round <= 6) {
       if (
         comboMoves === "rockscissors" ||
         comboMoves === "paperrock" ||
@@ -92,17 +88,17 @@ export default function Main() {
     if (round === 6) {
       setGameOver(true);
 
-      if (userPoints > computerPoints) {
+      if (userPoints >= computerPoints) {
         setResult(`${userName} wins`);
-        axios.post("http://localhost:5013/info", {
+        axios.post("http://localhost:5015/info", {
           User1Name: userName,
           User2Name: userName2,
           User1Result: "Win",
           User2Result: "Lose",
         });
-      } else if (userPoints < computerPoints) {
+      } else if (userPoints <= computerPoints) {
         setResult(`${userName2} wins`);
-        axios.post("http://localhost:5013/info", {
+        axios.post("http://localhost:5015/info", {
           User1Name: userName,
           User2Name: userName2,
           User1Result: "Lose",
@@ -110,7 +106,7 @@ export default function Main() {
         });
       } else {
         setResult("It's a tie");
-        axios.post("http://localhost:5013/info", {
+        axios.post("http://localhost:5015/info", {
           User1Name: userName,
           User2Name: userName2,
           User1Result: "Tie",
