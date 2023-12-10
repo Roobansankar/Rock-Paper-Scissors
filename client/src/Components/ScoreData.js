@@ -7,7 +7,7 @@ const ScoreData = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5013/info")
+      .get("http://localhost:5015/info")
       .then((response) => {
         setScoreData(response.data);
       })
@@ -29,14 +29,16 @@ const ScoreData = () => {
           </tr>
         </thead>
         <tbody>
-          {scoreData.map((data, index) => (
-            <tr key={index}>
-              <td>{data.User1Name}</td>
-              <td>{data.User2Name}</td>
-              <td>{data.User1Result}</td>
-              <td>{data.User2Result}</td>
-            </tr>
-          ))}
+          {scoreData.map((data, index) => {
+            return (
+              <tr key={index}>
+                <td>{data.user1name}</td>
+                <td>{data.user2name}</td>
+                <td>{data.user1result}</td>
+                <td>{data.user2result}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
